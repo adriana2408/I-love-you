@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animación de Letras Neón Verde</title>
+    <style>
+      body {
+        background-color: black;
+        color: white;
+        font-family: "Arial", sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        text-align: center;
+      }
+
+      .wrapper {
+        font-size: 4em;
+        letter-spacing: 5px;
+        margin-bottom: 20px;
+      }
+
+      .neon-text {
+        color: #fff;
+        text-shadow: 0 0 5px #fff, 0 0 10px #00ff00, 0 0 20px #00ff00,
+          0 0 40px #00ff00, 0 0 80px #00ff00, 0 0 100px #00ff00;
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(-50px);
+        animation: fadeIn 1s forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      #heart {
+        color: #00ff00;
+        font-size: 1.2em;
+        animation: blink 1.5s infinite alternate;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 0.8;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      #button {
+        background-color: #00ff00;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1em;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+      }
+
+      #button:hover {
+        background-color: #00cc00;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper" id="text">
+      <!-- Aquí se insertarán las letras -->
+    </div>
+    <div id="heart">♥</div>
+
+    <button id="button">Presióname amor</button>
+
+    <script>
+      const name = "JHONNIER";
+      const textWrapper = document.getElementById("text");
+
+      // Añade las letras una por una
+      name.split("").forEach((letter, index) => {
+        const span = document.createElement("span");
+        span.textContent = letter;
+        span.classList.add("neon-text");
+        span.style.animationDelay = `${index * 0.3}s`; // Retraso para el efecto de aparición
+        textWrapper.appendChild(span);
+      });
+
+      // Evento para el botón
+      document.getElementById("button").addEventListener("click", function () {
+        window.location.href = "inicio.html"; // Redirige a index.html
+      });
+
+      // Opción para reiniciar el bucle de animación
+      setInterval(() => {
+        const letters = document.querySelectorAll(".neon-text");
+        letters.forEach((letter, index) => {
+          letter.style.opacity = "0";
+          letter.style.transform = "translateY(-50px)";
+          setTimeout(() => {
+            letter.style.animation = `fadeIn 1s forwards`;
+            letter.style.animationDelay = `${index * 0.3}s`;
+          }, 500);
+        });
+      }, 5000); // Cada 5 segundos reinicia la animación
+    </script>
+
+    <style>
+      /* Estilo para las estrellas */
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        background: white;
+        animation: blink 1.5s infinite alternate;
+      }
+
+      @keyframes blink {
+        0% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+    </style>
+
+    <script>
+      // Crear estrellas en el fondo
+      function createStars(numStars) {
+        const body = document.body;
+        for (let i = 0; i < numStars; i++) {
+          const star = document.createElement("div");
+          star.className = "star";
+          const size = Math.random() * 3 + 1; // Tamaño aleatorio de las estrellas (1px a 4px)
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          star.style.top = `${Math.random() * 100}vh`; // Posición aleatoria en el eje Y
+          star.style.left = `${Math.random() * 100}vw`; // Posición aleatoria en el eje X
+          star.style.animationDuration = `${Math.random() * 1 + 0.5}s`; // Duración aleatoria de parpadeo
+          body.appendChild(star);
+        }
+      }
+
+      // Crear 100 estrellas
+      createStars(600);
+    </script>
+  </body>
+</html>
